@@ -1,83 +1,23 @@
-# Boilerplate MVC em Node.js com PostgreSQL
+## 1. Qual o papel de cada camada da arquitetura MVC?
 
-Este projeto é um boilerplate básico para uma aplicação Node.js seguindo o padrão MVC (Model-View-Controller), utilizando PostgreSQL como banco de dados.
+No projeto, usamos MVC para organizar o código:
 
-## Requisitos
+- **Model:** cuida do banco de dados. Ele salva, busca, edita e apaga alunos e cursos.
+- **Controller:** recebe os pedidos do usuário (como salvar ou editar um aluno), chama o Model e envia os dados para a View.
+- **View:** mostra as informações no navegador com HTML e EJS.
 
-- Node.js (versão X.X.X)
-- PostgreSQL (versão X.X.X)
+Eles trabalham juntos: o usuário faz uma ação → o Controller recebe → o Model acessa o banco → a View mostra o resultado.
 
-## Instalação
+---
 
-1. **Clonar o repositório:**
+## 2. Como o projeto usa JSON?
 
-```bash
-   git clone https://github.com/seu-usuario/seu-projeto.git
-   cd seu-projeto
-```
+Tem uma rota que responde em JSON:  
+**GET /alunos/curso/:curso_id**  
+Ela retorna os alunos de um curso específico em formato JSON. O Controller chama o Model, pega os dados e responde com `res.json(alunos)`. Isso pode ser usado por outro sistema ou por JavaScript no front-end.
 
-2. **Instalar as dependências:**
-    
-```bash
-npm install
-```
-    
-3. **Configurar o arquivo `.env`:**
-    
-Renomeie o arquivo `.env.example` para `.env` e configure as variáveis de ambiente necessárias, como as configurações do banco de dados PostgreSQL.
-    
+---
 
-Configuração do Banco de Dados
-------------------------------
+## 3. Por que usar HTML com formulários e tabelas?
 
-1. **Criar banco de dados:**
-    
-    Crie um banco de dados PostgreSQL com o nome especificado no seu arquivo `.env`.
-    
-2. **Executar o script SQL de inicialização:**
-    
-```bash
-npm run init-db
-```
-    
-Isso criará a tabela `users` no seu banco de dados PostgreSQL com UUID como chave primária e inserirá alguns registros de exemplo.
-    
-
-Funcionalidades
----------------
-
-* **Padrão MVC:** Estrutura organizada em Model, View e Controller.
-* **PostgreSQL:** Banco de dados relacional utilizado para persistência dos dados.
-* **UUID:** Utilização de UUID como chave primária na tabela `users`.
-* **Scripts com `nodemon`:** Utilização do `nodemon` para reiniciar automaticamente o servidor após alterações no código.
-* **Testes:** Inclui estrutura básica para testes automatizados.
-
-Scripts Disponíveis
--------------------
-
-* `npm start`: Inicia o servidor Node.js.
-* `npm run dev`: Inicia o servidor com `nodemon`, reiniciando automaticamente após alterações no código.
-* `npm run test`: Executa os testes automatizados.
-* `npm run test:coverage`: Executa os testes e gera um relatório de cobertura de código.
-
-Estrutura de Diretórios
------------------------
-
-* **`config/`**: Configurações do banco de dados e outras configurações do projeto.
-* **`controllers/`**: Controladores da aplicação (lógica de negócio).
-* **`models/`**: Modelos da aplicação (definições de dados e interações com o banco de dados).
-* **`routes/`**: Rotas da aplicação.
-* **`tests/`**: Testes automatizados.
-* **`views/`**: Views da aplicação (se aplicável).
-
-Contribuição
-------------
-
-Contribuições são bem-vindas! Sinta-se à vontade para abrir um issue ou enviar um pull request.
-
-Licença
--------
-
-Este projeto está licenciado sob a Licença MIT.
-
-Este README.md fornece uma visão geral clara do boilerplate, incluindo instruções de instalação, configuração do banco de dados, funcionalidades principais, scripts disponíveis, estrutura de diretórios, como contribuir e informações de licença. Certifique-se de personalizar as seções com detalhes específicos do seu projeto conforme necessário.
+Porque é simples, direto e fácil de usar. Com formulários, dá pra cadastrar e editar. Com tabelas, dá pra organizar os dados. Mesmo com tecnologias novas, HTML básico ainda funciona bem em projetos com Node.js, principalmente para sistemas simples e educativos.
